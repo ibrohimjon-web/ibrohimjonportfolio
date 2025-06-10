@@ -1,0 +1,464 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #f5f5f5;
+  --primary: #4a6bff;
+  --secondary: #f85f89;
+  --grid-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1e1e1e;
+  --primary: #6b8cff;
+  --secondary: #ff7b9d;
+  --grid-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes radialProgress {
+  from {
+    stroke-dashoffset: 314;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: calc(314 - (314 * var(--progress)) / 100);
+    opacity: 1;
+  }
+}
+
+@keyframes hexIn {
+  from {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Skills Section */
+.skills {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 80px 0;
+  transition: all 0.4s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.section-description {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* Chart Container */
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* Radial Chart */
+.radial-chart {
+  flex: 1;
+  min-width: 300px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.radial-chart h4 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.radial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.radial-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radial-progress {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(var(--color) calc(var(--progress) * 3.6deg), var(--card-bg) 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.radial-progress::before {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: var(--bg-color);
+  border-radius: 50%;
+}
+
+.radial-progress span {
+  position: relative;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.radial-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.radial-item:hover .radial-progress {
+  transform: scale(1.1);
+}
+
+/* Half Circle Chart */
+.half-circle-chart {
+  flex: 1;
+  min-width: 300px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.half-circle-chart h4 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.half-circle-container {
+  position: relative;
+  width: 250px;
+  height: 125px;
+  margin: 0 auto 30px;
+}
+
+.half-circle-segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, var(--start) 100%, var(--end) 100%);
+  background: conic-gradient(
+    var(--color) 0deg,
+    var(--color) calc(var(--value) * 1.8deg),
+    rgba(255, 255, 255, 0.1) calc(var(--value) * 1.8deg)
+  );
+  transform-origin: 50% 100%;
+  animation: fadeIn 1s ease forwards;
+}
+
+.half-circle-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: var(--bg-color);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.half-circle-center span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.half-circle-center small {
+  font-size: 0.7rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.half-circle-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: var(--bg-color);
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-label {
+  color: var(--text-color);
+}
+
+/* Skills List */
+.skills-list {
+  margin: 60px 0;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.7s;
+}
+
+.skills-list h3 {
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.skills-list ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skills-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.skill-name {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.skill-percent {
+  font-weight: 600;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--card-bg);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  border-radius: 5px;
+  animation: growWidth 1s ease forwards;
+}
+@keyframes growWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--width);
+  }
+}
+
+/* Hexagon Skill Cloud */
+.skill-cloud {
+  margin-top: 60px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  animation-delay: 0.8s;
+}
+
+.skill-cloud h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
+
+.hex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hexagon {
+  position: relative;
+  width: var(--size);
+  height: calc(var(--size) * 1.1547);
+  background-color: var(--color);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: hexIn 0.6s ease forwards;
+  animation-delay: var(--delay);
+  transition: transform 0.3s ease;
+}
+
+.hex-content {
+  text-align: center;
+  color: white;
+  padding: 10px;
+  transform: translateY(10%);
+}
+
+.hex-content span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.hex-content small {
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
+.hexagon:hover {
+  transform: scale(1.1) translateY(-5px);
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .chart-container {
+    flex-direction: column;
+  }
+
+  .radial-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .skills {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .radial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hex-grid {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .skills {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+  }
+
+  .radial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hexagon {
+    width: 80px;
+    height: 92px;
+  }
+
+  .hex-content span {
+    font-size: 0.8rem;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #555;
+}
