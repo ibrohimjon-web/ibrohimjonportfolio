@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5434',
+  baseURL: 'https://portfolobk.onrender.com',
 });
 
 export default api;
